@@ -42,11 +42,12 @@ class MainActivity : AppCompatActivity() {
         carl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if(result.resultCode == RESULT_OK) {
                 val contact = result.data?.getParcelableExtra<Contact>(EXTRA_CONTACT)
-                contact?.also {
-                    if(contactList.any{it.id == contact.id}){
-                        // Editar
+                contact?.also {newOrEditedContact ->
+                    if(contactList.any{it.id == newOrEditedContact.id}){
+                        val position = contactList.indexOfFirst { it.id == newOrEditedContact.id }
+                        contactList[position] = newOrEditedContact
                     }else {
-                        contactList.add(contact)
+                        contactList.add(newOrEditedContact)
                     }
                     contactAdapter.notifyDataSetChanged()
                 }
@@ -92,10 +93,9 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.editContactMi -> {
-                val contact = contactList[position]
-                val editContactIntent = Intent(this, ContactActivity::class.java)
-                editContactIntent.putExtra(EXTRA_CONTACT, contact)
-                carl.launch(editContactIntent)
+                carl.launch(Intent(this, ContactActivity::class.java).apply {
+                    putExtra(EXTRA_CONTACT, contactList[position])
+                })
                 true
             }
             else -> { false }
