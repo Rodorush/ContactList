@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import androidx.viewbinding.ViewBinding
 import br.edu.scl.ifsp.sdm.contactlist.R
 import br.edu.scl.ifsp.sdm.contactlist.databinding.TileContactBinding
 import br.edu.scl.ifsp.sdm.contactlist.model.Contact
