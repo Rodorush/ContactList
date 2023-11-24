@@ -18,6 +18,7 @@ class ContactRvAdapter(
     inner class ContactViewHolder(tileContactBinding: TileContactBinding):
         RecyclerView.ViewHolder(tileContactBinding.root) {
         val nameTv: TextView = tileContactBinding.nameTv
+        val phoneTv: TextView = tileContactBinding.phoneTv
         val emailTv: TextView = tileContactBinding.emailTv
 
         init {
@@ -54,6 +55,7 @@ class ContactRvAdapter(
         contactList[position].also { contact ->
             with(holder) {
                 nameTv.text = contact.name
+                phoneTv.text = contact.phone
                 emailTv.text = contact.email
             }
         }
